@@ -1,29 +1,22 @@
-name: Multiple Jobs Example
+name: Sequential Jobs Example
 
 on:
   push:
 
 jobs:
-  job1:
-    name: First Job - Build
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Print from Job 1
-        run: echo "Hello from Job 1 👋"
+      - run: echo "Building..."
 
-  job2:
-    name: Second Job - Test
+  test:
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
-      - name: Print from Job 2
-        run: echo "Hello from Job 2 ✅"
+      - run: echo "Testing..."
 
-  job3:
-    name: Third Job - Deploy
+  deploy:
     runs-on: ubuntu-latest
-
+    needs: test
     steps:
-      - name: Print from Job 3
-        run: echo "Hello from Job 3 🚀"
+      - run: echo "Deploying..."
