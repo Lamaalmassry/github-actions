@@ -1,22 +1,29 @@
-name: Run Node.js App
+name: Multiple Jobs Example
 
 on:
   push:
-    branches:
-      - main
 
 jobs:
-  run-node:
+  job1:
+    name: First Job - Build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Print from Job 1
+        run: echo "Hello from Job 1 👋"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+  job2:
+    name: Second Job - Test
+    runs-on: ubuntu-latest
 
-      - name: Run the app
-        run: node app.js
+    steps:
+      - name: Print from Job 2
+        run: echo "Hello from Job 2 ✅"
+
+  job3:
+    name: Third Job - Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print from Job 3
+        run: echo "Hello from Job 3 🚀"
