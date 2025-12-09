@@ -1,17 +1,22 @@
-name: Hello World Example
+name: Run Node.js App
 
 on:
   push:
-
+    branches:
+      - main
 
 jobs:
-  hello-job:
+  run-node:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Hello
-        run: echo "Hello from GitHub Actions 👋"
-    
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Print hello adel     
-        run: echo "hello adel" 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run the app
+        run: node app.js
